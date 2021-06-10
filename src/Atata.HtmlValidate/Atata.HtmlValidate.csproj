@@ -17,6 +17,7 @@ Atata Framework documentation: https://atata.io/</Description>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Atata" Version="1.11.2" />
   </ItemGroup>
 
 </Project>
