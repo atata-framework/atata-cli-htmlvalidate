@@ -1,4 +1,4 @@
-# Atata.Cli
+# Atata.Cli.HtmlValidate
 
 [![NuGet](http://img.shields.io/nuget/v/Atata.Cli.HtmlValidate.svg?style=flat)](https://www.nuget.org/packages/Atata.Cli.HtmlValidate/)
 [![GitHub release](https://img.shields.io/github/release/atata-framework/atata-cli-htmlvalidate.svg)](https://github.com/atata-framework/atata-cli-htmlvalidate/releases)
