@@ -15,4 +15,22 @@
     <ProjectReference Include="..\..\src\Atata.Cli.HtmlValidate\Atata.Cli.HtmlValidate.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Configs\empty-title-warn.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Configs\empty-title-off.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestPages\Errors2.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestPages\Errors1.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestPages\Errors0.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

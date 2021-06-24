@@ -8,9 +8,13 @@
 Targets .NET Standard 2.0.</Description>
     <RepositoryUrl>https://github.com/atata-framework/atata-cli-htmlvalidate</RepositoryUrl>
     <PackageId>Atata.Cli.HtmlValidate</PackageId>
-    <PackageTags>atata cli api html-validate</PackageTags>
+    <PackageTags>atata cli api html-validate html validation</PackageTags>
     <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/atata-framework/atata-cli-htmlvalidate</PackageProjectUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Atata.Cli" Version="1.0.0" />
+  </ItemGroup>
 
 </Project>
