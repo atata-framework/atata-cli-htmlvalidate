@@ -5,7 +5,9 @@
     <Version>1.0.0</Version>
     <Description>.NET library that provides an API for html-validate NPM package.
 
-Targets .NET Standard 2.0.</Description>
+Targets .NET Standard 2.0.
+
+Requires html-validate (https://www.npmjs.com/package/html-validate) NPM package to be installed.</Description>
     <RepositoryUrl>https://github.com/atata-framework/atata-cli-htmlvalidate</RepositoryUrl>
     <PackageId>Atata.Cli.HtmlValidate</PackageId>
     <PackageTags>atata cli api html-validate html validation</PackageTags>
