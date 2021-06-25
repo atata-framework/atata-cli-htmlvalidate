@@ -47,7 +47,8 @@ jobs:
   - task: Npm@1
     displayName: Install html-validate NPM package
     inputs:
-      command: install -g html-validate
+      command: install
+      arguments: -g html-validate
   - task: DotNetCoreCLI@2
     displayName: Run tests
     timeoutInMinutes: 30
