@@ -44,6 +44,10 @@ jobs:
       command: build
       projects: '**/*.sln'
       arguments: -c $(buildConfiguration) -p:RunCodeAnalysis=false
+  - task: Npm@1
+    displayName: Install html-validate NPM package
+    inputs:
+      command: install -g html-validate
   - task: DotNetCoreCLI@2
     displayName: Run tests
     timeoutInMinutes: 30
