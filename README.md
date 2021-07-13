@@ -57,6 +57,11 @@ Requires [html-validate](https://www.npmjs.com/package/html-validate) NPM packag
   new NpmCli()
       .InstallIfMissing(HtmlValidateCli.Name, global: true);
   ```
+- Using `HtmlValidateCli`:
+  ```cs
+  new HtmlValidateCli()
+      .RequireVersion("5.0.0");
+  ```
 
 ## Usage
 
