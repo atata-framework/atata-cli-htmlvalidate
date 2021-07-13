@@ -236,6 +236,7 @@ namespace Atata.Cli.HtmlValidate.IntegrationTests
         }
 
         [Test]
+        [Platform(Exclude = "Linux", Reason = "No permissions.")]
         public void RequireVersion_Then_GetInstalledVersion()
         {
             string version = "5.0.0";
