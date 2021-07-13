@@ -7,9 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-### Changed
+### Added
 
-- Upgrade `Atata.Cli.Npm` package to v1.1.0
+- Add `Atata.Cli.Npm` package v1.1.0
 
 ## [1.0.0] - 2021-06-25
 
