@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Atata.Cli.Npm;
 using NUnit.Framework;
 
 namespace Atata.Cli.HtmlValidate.IntegrationTests
@@ -221,6 +222,27 @@ namespace Atata.Cli.HtmlValidate.IntegrationTests
 
             Assert.Throws<CliCommandException>(() =>
                 ResultOfValidate(".", options).Get(out var _));
+        }
+
+        [Test]
+        public void GetInstalledVersion()
+        {
+            string expectedVersion = new NpmCli()
+                .GetInstalledVersion(HtmlValidateCli.Name, global: true);
+
+            _sut.ResultOf(x => x.GetInstalledVersion())
+                .Should.Not.BeNullOrEmpty()
+                .Should.Equal(expectedVersion);
+        }
+
+        [Test]
+        public void RequireVersion_Then_GetInstalledVersion()
+        {
+            string version = "5.0.0";
+
+            _sut.Act(x => x.RequireVersion(version))
+                .ResultOf(x => x.GetInstalledVersion())
+                .Should.Equal(version);
         }
 
         private Subject<HtmlValidateResult> ResultOfValidate(string path, HtmlValidateOptions options = null) =>

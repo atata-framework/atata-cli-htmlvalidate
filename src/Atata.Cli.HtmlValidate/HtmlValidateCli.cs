@@ -2,13 +2,14 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Atata.Cli.Npm;
 
 namespace Atata.Cli.HtmlValidate
 {
     /// <summary>
     /// Represents the CLI of "html-validate" NPM package.
     /// </summary>
-    public class HtmlValidateCli : ProgramCli<HtmlValidateCli>
+    public class HtmlValidateCli : GlobalNpmPackageCli<HtmlValidateCli>
     {
         /// <summary>
         /// The name of the program.
@@ -19,7 +20,7 @@ namespace Atata.Cli.HtmlValidate
         /// Initializes a new instance of the <see cref="HtmlValidateCli"/> class.
         /// </summary>
         public HtmlValidateCli()
-            : base(Name, true)
+            : base(Name)
         {
         }
 
@@ -80,5 +81,8 @@ namespace Atata.Cli.HtmlValidate
 
             return File.ReadAllText(fullFilePath);
         }
+
+        public override string GetInstalledVersion() =>
+            Execute("--version").Output.Split('-').Last();
     }
 }
