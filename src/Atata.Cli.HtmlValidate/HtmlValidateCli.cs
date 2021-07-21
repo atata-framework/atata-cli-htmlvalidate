@@ -82,7 +82,6 @@ namespace Atata.Cli.HtmlValidate
             return File.ReadAllText(fullFilePath);
         }
 
-        /// <inheritdoc cref="GlobalNpmPackageCli{TCli}.GetInstalledVersion"/>
         public override string GetInstalledVersion()
         {
             CliCommandResult versionCommandResult = ExecuteRaw("--version");
