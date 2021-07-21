@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade `Atata.Cli` package to v1.2.0.
 - Upgrade `Atata.Cli.Npm` package to v1.2.0.
 
+## Fixed
+
+- Fix `HtmlValidateCli.GetInstalledVersion()` method to return `null` when the package is not installed.
+
 ## [1.1.0] - 2021-07-13
 
 ### Added
