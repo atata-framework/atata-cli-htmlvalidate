@@ -7,7 +7,7 @@
 
 Targets .NET Standard 2.0.
 
-Requires html-validate (https://www.npmjs.com/package/html-validate) NPM package to be installed.</Description>
+Requires html-validate (https://www.npmjs.com/package/html-validate) NPM package to be installed, but can install itself.</Description>
     <RepositoryUrl>https://github.com/atata-framework/atata-cli-htmlvalidate</RepositoryUrl>
     <PackageId>Atata.Cli.HtmlValidate</PackageId>
     <PackageTags>atata cli api html-validate html validation</PackageTags>
