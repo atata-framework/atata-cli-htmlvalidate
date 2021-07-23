@@ -46,8 +46,13 @@ namespace Atata.Cli.HtmlValidate
                 ? ReadOutputFromFile(options.Formatter.FilePath)
                 : cliResult.Output;
 
+            output = PostProcessOutput(output);
+
             return new HtmlValidateResult(cliResult.ExitCode == 0, output);
         }
+
+        private static string PostProcessOutput(string output) =>
+            output?.Replace("тЬЦ", "\u2716");
 
         /// <inheritdoc cref="Validate(string, HtmlValidateOptions)"/>
         public async Task<HtmlValidateResult> ValidateAsync(string path, HtmlValidateOptions options = null) =>
