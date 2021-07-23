@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Post process CLI output to correct encoding of "X" symbol character.
 - Upgrade `Atata.Cli` package to v1.3.0.
+- Upgrade `Atata.Cli.Npm` package to v1.3.0.
 
 ## [1.2.0] - 2021-07-21
 
