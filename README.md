@@ -9,7 +9,7 @@
 
 **Atata.Cli** is a .NET library that provides an API for [html-validate](https://www.npmjs.com/package/html-validate) NPM package.
 
-*Targets .NET Standard 2.0*
+*The package targets .NET Standard 2.0, which supports .NET 5+, .NET Framework 4.6.1+ and .NET Core/Standard 2.0+.*
 
 ## Table of Contents
 
