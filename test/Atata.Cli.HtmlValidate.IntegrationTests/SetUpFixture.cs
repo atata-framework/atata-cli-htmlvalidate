@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using Atata.Cli.Npm;
+﻿using Atata.Cli.Npm;
 using NUnit.Framework;
 
 namespace Atata.Cli.HtmlValidate.IntegrationTests
@@ -8,12 +7,10 @@ namespace Atata.Cli.HtmlValidate.IntegrationTests
     public class SetUpFixture
     {
         [OneTimeSetUp]
-        public void GlobalSetUp() =>
+        public void GlobalSetUp()
+        {
             new NpmCli()
-                .WithCliCommandFactory(OSDependentShellCliCommandFactory
-                    .UseCmdForWindows()
-                    .UseForOS(OSPlatform.OSX, new ShShellCliCommandFactory())
-                    .UseForOtherOS(new SudoShellCliCommandFactory()))
                 .InstallIfMissing(HtmlValidateCli.Name, global: true);
+        }
     }
 }
