@@ -19,8 +19,8 @@ namespace Atata.Cli.HtmlValidate.IntegrationTests
         [Test]
         public void Validate_InvalidFile()
         {
-            Assert.Throws<CliCommandException>(() =>
-                ResultOfValidate("missing.html").Get(out var _));
+            ResultOfValidate("missing.html")
+                .Should.Throw<CliCommandException>();
         }
 
         [Test]
@@ -174,10 +174,10 @@ namespace Atata.Cli.HtmlValidate.IntegrationTests
         {
             string outputFilePath = Path.IsPathRooted(filePath)
                 ? filePath
-                : Path.Combine(_sut.Value.WorkingDirectory, filePath);
+                : Path.Combine(_sut.Object.WorkingDirectory, filePath);
 
             new FileSubject(outputFilePath)
-                .Exists.Should.BeTrue();
+                .Should.Exist();
 
             File.Delete(outputFilePath);
         }
@@ -220,8 +220,8 @@ namespace Atata.Cli.HtmlValidate.IntegrationTests
                 Extensions = new[] { "htm" }
             };
 
-            Assert.Throws<CliCommandException>(() =>
-                ResultOfValidate(".", options).Get(out var _));
+            ResultOfValidate(".", options)
+                .Should.Throw<CliCommandException>();
         }
 
         [Test]
