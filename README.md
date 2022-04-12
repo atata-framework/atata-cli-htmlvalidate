@@ -7,7 +7,7 @@
 [![Atata docs](https://img.shields.io/badge/docs-Atata_Framework-orange.svg)](https://atata.io)
 [![Twitter](https://img.shields.io/badge/follow-@AtataFramework-blue.svg)](https://twitter.com/AtataFramework)
 
-**Atata.Cli** is a .NET library that provides an API for [html-validate](https://www.npmjs.com/package/html-validate) NPM package.
+**Atata.Cli.HtmlValidate** is a .NET library that provides an API for [html-validate](https://www.npmjs.com/package/html-validate) NPM package.
 
 *The package targets .NET Standard 2.0, which supports .NET 5+, .NET Framework 4.6.1+ and .NET Core/Standard 2.0+.*
 
