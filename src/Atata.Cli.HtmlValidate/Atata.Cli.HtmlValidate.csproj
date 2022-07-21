@@ -16,8 +16,8 @@ Requires html-validate (https://www.npmjs.com/package/html-validate) NPM package
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Atata.Cli" Version="2.0.0" />
-    <PackageReference Include="Atata.Cli.Npm" Version="2.0.0" />
+    <PackageReference Include="Atata.Cli" Version="2.1.0" />
+    <PackageReference Include="Atata.Cli.Npm" Version="2.1.0" />
   </ItemGroup>
 
 </Project>
