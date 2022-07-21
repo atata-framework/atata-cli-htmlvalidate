@@ -5,249 +5,262 @@ using NUnit.Framework;
 
 namespace Atata.Cli.HtmlValidate.IntegrationTests
 {
-    [TestFixture]
-    public class HtmlValidateCliTests
+    public abstract class HtmlValidateCliTests
     {
-        private Subject<HtmlValidateCli> _sut;
+        private const string TestVersion = "7.1.2";
+
+        protected Subject<HtmlValidateCli> Sut { get; private set; }
 
         [OneTimeSetUp]
         public void SetUpFixture()
         {
-            _sut = HtmlValidateCli.InDirectory("TestPages").ToSutSubject();
+            new NpmCli()
+                .InstallIfMissing(HtmlValidateCli.Name, TestVersion, global: true);
+
+            Sut = HtmlValidateCli.InDirectory("TestPages").ToSutSubject();
         }
 
-        [Test]
-        public void Validate_InvalidFile()
+        public class Validate : HtmlValidateCliTests
         {
-            ResultOfValidate("missing.html")
-                .Should.Throw<CliCommandException>();
-        }
-
-        [Test]
-        public void Validate_NoErrors()
-        {
-            ResultOfValidate("Errors0.html")
-                .ValueOf(x => x.IsSuccessful).Should.BeTrue()
-                .ValueOf(x => x.Output).Should.BeEmpty();
-        }
-
-        [Test]
-        public void Validate_1Error()
-        {
-            ResultOfValidate("Errors1.html")
-                .ValueOf(x => x.IsSuccessful).Should.BeFalse()
-                .ValueOf(x => x.Output).Should.Contain("1 error, 0 warnings");
-        }
-
-        [Test]
-        public void Validate_2Errors()
-        {
-            ResultOfValidate("Errors2.html")
-                .ValueOf(x => x.IsSuccessful).Should.BeFalse()
-                .ValueOf(x => x.Output).Should.Contain("2 errors, 0 warnings");
-        }
-
-        [Test]
-        public void Validate_2Errors_WithConfig_Where1ErrorIsOff()
-        {
-            var options = new HtmlValidateOptions
+            [Test]
+            public void InvalidFile()
             {
-                Config = Configs.EmptyTitleOff
-            };
+                ResultOfValidate("missing.html")
+                    .Should.Throw<CliCommandException>();
+            }
 
-            ResultOfValidate("Errors2.html", options)
-                .ValueOf(x => x.IsSuccessful).Should.BeFalse()
-                .ValueOf(x => x.Output).Should.Contain("1 error, 0 warnings");
-        }
-
-        [Test]
-        public void Validate_2Errors_WithConfig_Where1ErrorIsWarn()
-        {
-            var options = new HtmlValidateOptions
+            [Test]
+            public void When0Errors()
             {
-                Config = Configs.EmptyTitleWarn
-            };
+                ResultOfValidate("Errors0.html")
+                    .ValueOf(x => x.IsSuccessful).Should.BeTrue()
+                    .ValueOf(x => x.Output).Should.BeEmpty();
+            }
 
-            ResultOfValidate("Errors2.html", options)
-                .ValueOf(x => x.IsSuccessful).Should.BeFalse()
-                .ValueOf(x => x.Output).Should.Contain("1 error, 1 warning");
-        }
-
-        [Test]
-        public void Validate_1Error_WithConfig_WhereThisErrorIsWarn_AndMaxWarningsIs0()
-        {
-            var options = new HtmlValidateOptions
+            [Test]
+            public void When1Error()
             {
-                Config = Configs.EmptyTitleWarn,
-                MaxWarnings = 0
-            };
+                ResultOfValidate("Errors1.html")
+                    .ValueOf(x => x.IsSuccessful).Should.BeFalse()
+                    .ValueOf(x => x.Output).Should.Contain("1 error, 0 warnings");
+            }
 
-            ResultOfValidate("Errors1.html", options)
-                .ValueOf(x => x.IsSuccessful).Should.BeFalse()
-                .ValueOf(x => x.Output).Should.Contain("0 errors, 1 warning");
-        }
-
-        [Test]
-        public void Validate_1Error_WithConfig_WhereThisErrorIsWarn_AndMaxWarningsIs1()
-        {
-            var options = new HtmlValidateOptions
+            [Test]
+            public void When2Errors()
             {
-                Config = Configs.EmptyTitleWarn,
-                MaxWarnings = 1
-            };
+                ResultOfValidate("Errors2.html")
+                    .ValueOf(x => x.IsSuccessful).Should.BeFalse()
+                    .ValueOf(x => x.Output).Should.Contain("2 errors, 0 warnings");
+            }
 
-            ResultOfValidate("Errors1.html", options)
-                .ValueOf(x => x.IsSuccessful).Should.BeTrue()
-                .ValueOf(x => x.Output).Should.Contain("0 errors, 1 warning");
-        }
-
-        [Test]
-        public void Validate_1Error_WithFullPathConfig_WhereThisErrorIsOff()
-        {
-            var options = new HtmlValidateOptions
+            [Test]
+            public void When2Errors_WithConfig_Where1ErrorIsOff()
             {
-                Config = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs", "empty-title-off.json"),
-            };
+                var options = new HtmlValidateOptions
+                {
+                    Config = Configs.EmptyTitleOff
+                };
 
-            ResultOfValidate("Errors1.html", options)
-                .ValueOf(x => x.IsSuccessful).Should.BeTrue()
-                .ValueOf(x => x.Output).Should.BeEmpty();
-        }
+                ResultOfValidate("Errors2.html", options)
+                    .ValueOf(x => x.IsSuccessful).Should.BeFalse()
+                    .ValueOf(x => x.Output).Should.Contain("1 error, 0 warnings");
+            }
 
-        [Test]
-        public void Validate_WithCodeframeFormatter()
-        {
-            var options = new HtmlValidateOptions
+            [Test]
+            public void When2Errors_WithConfig_Where1ErrorIsWarn()
             {
-                Formatter = HtmlValidateFormatter.Codeframe()
-            };
+                var options = new HtmlValidateOptions
+                {
+                    Config = Configs.EmptyTitleWarn
+                };
 
-            ResultOfValidate("Errors1.html", options)
-                .ValueOf(x => x.IsSuccessful).Should.BeFalse()
-                .ValueOf(x => x.Output).Should.Contain("1 error found");
-        }
+                ResultOfValidate("Errors2.html", options)
+                    .ValueOf(x => x.IsSuccessful).Should.BeFalse()
+                    .ValueOf(x => x.Output).Should.Contain("1 error, 1 warning");
+            }
 
-        [Test]
-        public void Validate_WithJsonFormatter()
-        {
-            var options = new HtmlValidateOptions
+            [Test]
+            public void When1Error_WithConfig_WhereThisErrorIsWarn_AndMaxWarningsIs0()
             {
-                Formatter = HtmlValidateFormatter.Json()
-            };
+                var options = new HtmlValidateOptions
+                {
+                    Config = Configs.EmptyTitleWarn,
+                    MaxWarnings = 0
+                };
 
-            ResultOfValidate("Errors1.html", options)
-                .ValueOf(x => x.IsSuccessful).Should.BeFalse()
-                .ValueOf(x => x.Output).Should.Contain("\"errorCount\":1,");
-        }
+                ResultOfValidate("Errors1.html", options)
+                    .ValueOf(x => x.IsSuccessful).Should.BeFalse()
+                    .ValueOf(x => x.Output).Should.Contain("0 errors, 1 warning");
+            }
 
-        [Test]
-        public void Validate_WithTextFormatterTargetingRelativeFile()
-        {
-            string filePath = $"{TestContext.CurrentContext.Test.Name}.txt";
-
-            ValidateWithTextFormatterTargetingFile(filePath);
-        }
-
-        [Test]
-        public void Validate_WithTextFormatterTargetingFullPathFile()
-        {
-            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestFiles", $"{TestContext.CurrentContext.Test.Name}.txt");
-
-            ValidateWithTextFormatterTargetingFile(filePath);
-        }
-
-        private void ValidateWithTextFormatterTargetingFile(string filePath)
-        {
-            var options = new HtmlValidateOptions
+            [Test]
+            public void When1Error_WithConfig_WhereThisErrorIsWarn_AndMaxWarningsIs1()
             {
-                Formatter = HtmlValidateFormatter.Text(filePath)
-            };
+                var options = new HtmlValidateOptions
+                {
+                    Config = Configs.EmptyTitleWarn,
+                    MaxWarnings = 1
+                };
 
-            ResultOfValidate("Errors1.html", options)
-                .ValueOf(x => x.IsSuccessful).Should.BeFalse()
-                .ValueOf(x => x.Output).Should.Contain("error [empty-title]");
+                ResultOfValidate("Errors1.html", options)
+                    .ValueOf(x => x.IsSuccessful).Should.BeTrue()
+                    .ValueOf(x => x.Output).Should.Contain("0 errors, 1 warning");
+            }
 
-            AssertFileExistsAndDelete(filePath);
-        }
-
-        private void AssertFileExistsAndDelete(string filePath)
-        {
-            string outputFilePath = Path.IsPathRooted(filePath)
-                ? filePath
-                : Path.Combine(_sut.Object.WorkingDirectory, filePath);
-
-            new FileSubject(outputFilePath)
-                .Should.Exist();
-
-            File.Delete(outputFilePath);
-        }
-
-        [Test]
-        public void Validate_0Errors_WithTextFormatterTargetingRelativeFile()
-        {
-            string filePath = $"{TestContext.CurrentContext.Test.Name}.txt";
-
-            var options = new HtmlValidateOptions
+            [Test]
+            public void When1Error_WithFullPathConfig_WhereThisErrorIsOff()
             {
-                Formatter = HtmlValidateFormatter.Text(filePath)
-            };
+                var options = new HtmlValidateOptions
+                {
+                    Config = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs", "empty-title-off.json"),
+                };
 
-            ResultOfValidate("Errors0.html", options)
-                .ValueOf(x => x.IsSuccessful).Should.BeTrue()
-                .ValueOf(x => x.Output).Should.BeEmpty();
+                ResultOfValidate("Errors1.html", options)
+                    .ValueOf(x => x.IsSuccessful).Should.BeTrue()
+                    .ValueOf(x => x.Output).Should.BeEmpty();
+            }
 
-            AssertFileExistsAndDelete(filePath);
-        }
-
-        [Test]
-        public void Validate_CurrentDirectory_WithValidExtensions()
-        {
-            var options = new HtmlValidateOptions
+            [Test]
+            public void WithCodeframeFormatter()
             {
-                Extensions = new[] { "html" }
-            };
+                var options = new HtmlValidateOptions
+                {
+                    Formatter = HtmlValidateFormatter.Codeframe()
+                };
 
-            ResultOfValidate(".", options)
-                .ValueOf(x => x.IsSuccessful).Should.BeFalse()
-                .ValueOf(x => x.Output).Should.Contain("3 errors, 0 warnings)");
-        }
+                ResultOfValidate("Errors1.html", options)
+                    .ValueOf(x => x.IsSuccessful).Should.BeFalse()
+                    .ValueOf(x => x.Output).Should.Contain("1 error found");
+            }
 
-        [Test]
-        public void Validate_CurrentDirectory_WithInvalidExtensions()
-        {
-            var options = new HtmlValidateOptions
+            [Test]
+            public void WithJsonFormatter()
             {
-                Extensions = new[] { "htm" }
-            };
+                var options = new HtmlValidateOptions
+                {
+                    Formatter = HtmlValidateFormatter.Json()
+                };
 
-            ResultOfValidate(".", options)
-                .Should.Throw<CliCommandException>();
+                ResultOfValidate("Errors1.html", options)
+                    .ValueOf(x => x.IsSuccessful).Should.BeFalse()
+                    .ValueOf(x => x.Output).Should.Contain("\"errorCount\":1,");
+            }
+
+            [Test]
+            public void WithTextFormatterTargetingRelativeFile()
+            {
+                string filePath = $"{TestContext.CurrentContext.Test.Name}.txt";
+
+                ValidateWithTextFormatterTargetingFile(filePath);
+            }
+
+            [Test]
+            public void WithTextFormatterTargetingFullPathFile()
+            {
+                string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestFiles", $"{TestContext.CurrentContext.Test.Name}.txt");
+
+                ValidateWithTextFormatterTargetingFile(filePath);
+            }
+
+            private void ValidateWithTextFormatterTargetingFile(string filePath)
+            {
+                var options = new HtmlValidateOptions
+                {
+                    Formatter = HtmlValidateFormatter.Text(filePath)
+                };
+
+                ResultOfValidate("Errors1.html", options)
+                    .ValueOf(x => x.IsSuccessful).Should.BeFalse()
+                    .ValueOf(x => x.Output).Should.Contain("error [empty-title]");
+
+                AssertFileExistsAndDelete(filePath);
+            }
+
+            private void AssertFileExistsAndDelete(string filePath)
+            {
+                string outputFilePath = Path.IsPathRooted(filePath)
+                    ? filePath
+                    : Path.Combine(Sut.Object.WorkingDirectory, filePath);
+
+                new FileSubject(outputFilePath)
+                    .Should.Exist();
+
+                File.Delete(outputFilePath);
+            }
+
+            [Test]
+            public void When0Errors_WithTextFormatterTargetingRelativeFile()
+            {
+                string filePath = $"{TestContext.CurrentContext.Test.Name}.txt";
+
+                var options = new HtmlValidateOptions
+                {
+                    Formatter = HtmlValidateFormatter.Text(filePath)
+                };
+
+                ResultOfValidate("Errors0.html", options)
+                    .ValueOf(x => x.IsSuccessful).Should.BeTrue()
+                    .ValueOf(x => x.Output).Should.BeEmpty();
+
+                AssertFileExistsAndDelete(filePath);
+            }
+
+            [Test]
+            public void CurrentDirectory_WithValidExtensions()
+            {
+                var options = new HtmlValidateOptions
+                {
+                    Extensions = new[] { "html" }
+                };
+
+                ResultOfValidate(".", options)
+                    .ValueOf(x => x.IsSuccessful).Should.BeFalse()
+                    .ValueOf(x => x.Output).Should.Contain("3 errors, 0 warnings)");
+            }
+
+            [Test]
+            public void CurrentDirectory_WithInvalidExtensions()
+            {
+                var options = new HtmlValidateOptions
+                {
+                    Extensions = new[] { "htm" }
+                };
+
+                ResultOfValidate(".", options)
+                    .Should.Throw<CliCommandException>();
+            }
+
+            private Subject<HtmlValidateResult> ResultOfValidate(string path, HtmlValidateOptions options = null) =>
+                Sut.ResultOf(x => x.Validate(path, options));
         }
 
-        [Test]
-        public void GetInstalledVersion()
+        public class GetInstalledVersion : HtmlValidateCliTests
         {
-            string expectedVersion = new NpmCli()
-                .GetInstalledVersion(HtmlValidateCli.Name, global: true);
+            [Test]
+            public void Ok()
+            {
+                string expectedVersion = new NpmCli()
+                    .GetInstalledVersion(HtmlValidateCli.Name, global: true);
 
-            _sut.ResultOf(x => x.GetInstalledVersion())
-                .Should.Not.BeNullOrEmpty()
-                .Should.Equal(expectedVersion);
+                Sut.ResultOf(x => x.GetInstalledVersion())
+                    .Should.Not.BeNullOrEmpty()
+                    .Should.Equal(expectedVersion);
+            }
         }
 
-        [Test]
-        [Platform(Exclude = "Linux", Reason = "No permissions.")]
-        public void RequireVersion_Then_GetInstalledVersion()
+        public class RequireVersion : HtmlValidateCliTests
         {
-            string version = "5.0.0";
+            [Test]
+            [Platform(Exclude = "Linux", Reason = "No permissions.")]
+            public void Then_GetInstalledVersion()
+            {
+                string version = "5.0.0";
 
-            _sut.Act(x => x.RequireVersion(version))
-                .ResultOf(x => x.GetInstalledVersion())
-                .Should.Equal(version);
+                Sut.Act(x => x.RequireVersion(version))
+                    .ResultOf(x => x.GetInstalledVersion())
+                    .Should.Equal(version);
+            }
         }
-
-        private Subject<HtmlValidateResult> ResultOfValidate(string path, HtmlValidateOptions options = null) =>
-            _sut.ResultOf(x => x.Validate(path, options));
 
         private static class Configs
         {
