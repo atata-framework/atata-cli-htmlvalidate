@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Upgrade Atata.Cli package to v2.1.0.
 - Upgrade Atata.Cli.Npm package to v2.1.0.
+- Set `ResultValidationRules = CliCommandResultValidationRules.NoError;` in `HtmlValidateCli` constructor.
 
 ## [2.0.0] - 2022-05-10
 

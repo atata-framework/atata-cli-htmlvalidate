@@ -22,6 +22,7 @@ namespace Atata.Cli.HtmlValidate
         public HtmlValidateCli()
             : base(Name)
         {
+            ResultValidationRules = CliCommandResultValidationRules.NoError;
         }
 
         /// <summary>
