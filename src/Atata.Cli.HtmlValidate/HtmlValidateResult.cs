@@ -21,9 +21,7 @@
         /// </summary>
         public string Output { get; }
 
-        public override string ToString()
-        {
-            return $"{nameof(IsSuccessful)} = {IsSuccessful}";
-        }
+        public override string ToString() =>
+            $"{nameof(IsSuccessful)} = {IsSuccessful}";
     }
 }

@@ -20,10 +20,8 @@ namespace Atata.Cli.HtmlValidate
         /// Initializes a new instance of the <see cref="HtmlValidateCli"/> class.
         /// </summary>
         public HtmlValidateCli()
-            : base(Name)
-        {
+            : base(Name) =>
             ResultValidationRules = CliCommandResultValidationRules.NoError;
-        }
 
         /// <summary>
         /// Validates the file or all files in the directory by the specified path.
