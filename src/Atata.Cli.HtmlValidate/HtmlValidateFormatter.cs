@@ -38,6 +38,7 @@
 
         public static class Names
         {
+#pragma warning disable S3218 // Inner class members should not shadow outer class "static" or type members
             public const string Checkstyle = "checkstyle";
 
             public const string Codeframe = "codeframe";
@@ -47,6 +48,7 @@
             public const string Stylish = "stylish";
 
             public const string Text = "text";
+#pragma warning restore S3218 // Inner class members should not shadow outer class "static" or type members
         }
     }
 }
