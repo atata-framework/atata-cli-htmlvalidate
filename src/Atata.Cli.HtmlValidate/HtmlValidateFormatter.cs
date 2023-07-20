@@ -1,4 +1,6 @@
-﻿namespace Atata.Cli.HtmlValidate
+﻿// Ignore Spelling: Checkstyle Codeframe
+
+namespace Atata.Cli.HtmlValidate
 {
     /// <summary>
     /// Represents the formatter.

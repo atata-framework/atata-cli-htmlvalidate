@@ -1,4 +1,6 @@
-﻿using Atata.Cli.Npm;
+﻿// Ignore Spelling: Codeframe
+
+using Atata.Cli.Npm;
 
 namespace Atata.Cli.HtmlValidate.IntegrationTests;
 
