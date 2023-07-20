@@ -24,19 +24,19 @@ namespace Atata.Cli.HtmlValidate
         public string FilePath { get; }
 
         public static HtmlValidateFormatter Checkstyle(string filePath = null) =>
-            new HtmlValidateFormatter(Names.Checkstyle, filePath);
+            new(Names.Checkstyle, filePath);
 
         public static HtmlValidateFormatter Codeframe(string filePath = null) =>
-            new HtmlValidateFormatter(Names.Codeframe, filePath);
+            new(Names.Codeframe, filePath);
 
         public static HtmlValidateFormatter Json(string filePath = null) =>
-            new HtmlValidateFormatter(Names.Json, filePath);
+            new(Names.Json, filePath);
 
         public static HtmlValidateFormatter Stylish(string filePath = null) =>
-            new HtmlValidateFormatter(Names.Stylish, filePath);
+            new(Names.Stylish, filePath);
 
         public static HtmlValidateFormatter Text(string filePath = null) =>
-            new HtmlValidateFormatter(Names.Text, filePath);
+            new(Names.Text, filePath);
 
         public static class Names
         {
