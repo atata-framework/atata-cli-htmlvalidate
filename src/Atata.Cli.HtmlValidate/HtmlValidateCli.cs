@@ -16,8 +16,11 @@ public class HtmlValidateCli : GlobalNpmPackageCli<HtmlValidateCli>
     /// Initializes a new instance of the <see cref="HtmlValidateCli"/> class.
     /// </summary>
     public HtmlValidateCli()
-        : base(Name) =>
+        : base(Name)
+    {
         ResultValidationRules = CliCommandResultValidationRules.NoError;
+        Encoding = Encoding.UTF8;
+    }
 
     /// <summary>
     /// Validates the file or all files in the directory by the specified path.
@@ -41,13 +44,8 @@ public class HtmlValidateCli : GlobalNpmPackageCli<HtmlValidateCli>
             ? ReadOutputFromFile(options.Formatter.FilePath)
             : cliResult.Output;
 
-        output = PostProcessOutput(output);
-
         return new HtmlValidateResult(cliResult.ExitCode == 0, output);
     }
-
-    private static string PostProcessOutput(string output) =>
-        output?.Replace("тЬЦ", "\u2716");
 
     /// <inheritdoc cref="Validate(string, HtmlValidateOptions)"/>
     public async Task<HtmlValidateResult> ValidateAsync(string path, HtmlValidateOptions options = null) =>
