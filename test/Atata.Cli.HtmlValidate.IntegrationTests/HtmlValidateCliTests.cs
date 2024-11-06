@@ -201,7 +201,7 @@ public abstract class HtmlValidateCliTests
         {
             var options = new HtmlValidateOptions
             {
-                Extensions = new[] { "html" }
+                Extensions = ["html"]
             };
 
             ResultOfValidate(".", options)
@@ -214,7 +214,7 @@ public abstract class HtmlValidateCliTests
         {
             var options = new HtmlValidateOptions
             {
-                Extensions = new[] { "htm" }
+                Extensions = ["htm"]
             };
 
             ResultOfValidate(".", options)
