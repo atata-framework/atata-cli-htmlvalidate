@@ -26,5 +26,5 @@ public class HtmlValidateOptions
     /// Gets or sets the file extensions to use when searching for files in directories.
     /// For example: <c>"html"</c>, <c>"vue"</c>, etc.
     /// </summary>
-    public string[] Extensions { get; set; } = Array.Empty<string>();
+    public string[] Extensions { get; set; } = [];
 }
