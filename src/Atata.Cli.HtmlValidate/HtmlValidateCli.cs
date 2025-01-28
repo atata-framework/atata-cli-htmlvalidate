@@ -67,7 +67,7 @@ public class HtmlValidateCli : GlobalNpmPackageCli<HtmlValidateCli>
         if (!string.IsNullOrEmpty(options.Config))
             commandText.Append($" -c \"{options.Config}\"");
 
-        if (options.Extensions?.Any() ?? false)
+        if (options.Extensions?.Length > 0)
             commandText.Append(" --ext ").Append(string.Join(",", options.Extensions));
     }
 
