@@ -30,9 +30,9 @@ public class HtmlValidateCli : GlobalNpmPackageCli<HtmlValidateCli>
     /// <returns>The result of validation.</returns>
     public HtmlValidateResult Validate(string path, HtmlValidateOptions options = null)
     {
-        StringBuilder commandText = new StringBuilder();
+        StringBuilder commandText = new();
 
-        if (!string.IsNullOrEmpty(path))
+        if (path?.Length > 0)
             commandText.Append($"\"{path}\"");
 
         if (options != null)
@@ -44,12 +44,12 @@ public class HtmlValidateCli : GlobalNpmPackageCli<HtmlValidateCli>
             ? ReadOutputFromFile(options.Formatter.FilePath)
             : cliResult.Output;
 
-        return new HtmlValidateResult(cliResult.ExitCode == 0, output);
+        return new(cliResult.ExitCode == 0, output);
     }
 
     /// <inheritdoc cref="Validate(string, HtmlValidateOptions)"/>
     public async Task<HtmlValidateResult> ValidateAsync(string path, HtmlValidateOptions options = null) =>
-        await Task.Run(() => Validate(path, options));
+        await Task.Run(() => Validate(path, options)).ConfigureAwait(false);
 
     private static void AddOptions(StringBuilder commandText, HtmlValidateOptions options)
     {
@@ -64,7 +64,7 @@ public class HtmlValidateCli : GlobalNpmPackageCli<HtmlValidateCli>
         if (options.MaxWarnings != null)
             commandText.Append($" --max-warnings {options.MaxWarnings}");
 
-        if (!string.IsNullOrEmpty(options.Config))
+        if (options.Config?.Length > 0)
             commandText.Append($" -c \"{options.Config}\"");
 
         if (options.Extensions?.Length > 0)
