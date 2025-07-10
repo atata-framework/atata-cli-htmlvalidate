@@ -8,7 +8,7 @@ public abstract class HtmlValidateCliTests
 {
     private const string TestVersion = "8.29.0";
 
-    protected Subject<HtmlValidateCli> Sut { get; private set; }
+    protected Subject<HtmlValidateCli> Sut { get; private set; } = null!;
 
     [OneTimeSetUp]
     public void SetUpFixture()
@@ -221,7 +221,7 @@ public abstract class HtmlValidateCliTests
                 .Should.Throw<CliCommandException>();
         }
 
-        private Subject<HtmlValidateResult> ResultOfValidate(string path, HtmlValidateOptions options = null) =>
+        private Subject<HtmlValidateResult> ResultOfValidate(string path, HtmlValidateOptions? options = null) =>
             Sut.ResultOf(x => x.Validate(path, options));
     }
 
