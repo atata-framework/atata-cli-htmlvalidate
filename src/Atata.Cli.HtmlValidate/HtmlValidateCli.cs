@@ -28,19 +28,19 @@ public class HtmlValidateCli : GlobalNpmPackageCli<HtmlValidateCli>
     /// <param name="path">The file or directory path relative to <see cref="ProgramCli.WorkingDirectory"/> property value of this instance.</param>
     /// <param name="options">The options.</param>
     /// <returns>The result of validation.</returns>
-    public HtmlValidateResult Validate(string path, HtmlValidateOptions options = null)
+    public HtmlValidateResult Validate(string path, HtmlValidateOptions? options = null)
     {
         StringBuilder commandText = new();
 
         if (path?.Length > 0)
             commandText.Append($"\"{path}\"");
 
-        if (options != null)
+        if (options is not null)
             AddOptions(commandText, options);
 
         var cliResult = Execute(commandText.ToString());
 
-        string output = options?.Formatter?.FilePath != null
+        string output = options?.Formatter?.FilePath is not null
             ? ReadOutputFromFile(options.Formatter.FilePath)
             : cliResult.Output;
 
@@ -48,12 +48,12 @@ public class HtmlValidateCli : GlobalNpmPackageCli<HtmlValidateCli>
     }
 
     /// <inheritdoc cref="Validate(string, HtmlValidateOptions)"/>
-    public async Task<HtmlValidateResult> ValidateAsync(string path, HtmlValidateOptions options = null) =>
+    public async Task<HtmlValidateResult> ValidateAsync(string path, HtmlValidateOptions? options = null) =>
         await Task.Run(() => Validate(path, options)).ConfigureAwait(false);
 
     private static void AddOptions(StringBuilder commandText, HtmlValidateOptions options)
     {
-        if (options.Formatter != null)
+        if (options.Formatter is not null)
         {
             commandText.Append($" -f {options.Formatter.Name}");
 
@@ -61,7 +61,7 @@ public class HtmlValidateCli : GlobalNpmPackageCli<HtmlValidateCli>
                 commandText.Append($"={options.Formatter.FilePath}");
         }
 
-        if (options.MaxWarnings != null)
+        if (options.MaxWarnings is not null)
             commandText.Append($" --max-warnings {options.MaxWarnings}");
 
         if (options.Config?.Length > 0)
@@ -80,7 +80,7 @@ public class HtmlValidateCli : GlobalNpmPackageCli<HtmlValidateCli>
         return File.ReadAllText(fullFilePath);
     }
 
-    public override string GetInstalledVersion()
+    public override string? GetInstalledVersion()
     {
         CliCommandResult versionCommandResult = ExecuteRaw("--version");
 

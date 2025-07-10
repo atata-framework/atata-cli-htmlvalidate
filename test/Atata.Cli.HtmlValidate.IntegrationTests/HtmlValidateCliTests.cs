@@ -47,7 +47,7 @@ public abstract class HtmlValidateCliTests
         [Test]
         public void When2Errors_WithConfig_Where1ErrorIsOff()
         {
-            var options = new HtmlValidateOptions
+            HtmlValidateOptions options = new()
             {
                 Config = Configs.EmptyTitleOff
             };
@@ -60,7 +60,7 @@ public abstract class HtmlValidateCliTests
         [Test]
         public void When2Errors_WithConfig_Where1ErrorIsWarn()
         {
-            var options = new HtmlValidateOptions
+            HtmlValidateOptions options = new()
             {
                 Config = Configs.EmptyTitleWarn
             };
@@ -73,7 +73,7 @@ public abstract class HtmlValidateCliTests
         [Test]
         public void When1Error_WithConfig_WhereThisErrorIsWarn_AndMaxWarningsIs0()
         {
-            var options = new HtmlValidateOptions
+            HtmlValidateOptions options = new()
             {
                 Config = Configs.EmptyTitleWarn,
                 MaxWarnings = 0
@@ -87,7 +87,7 @@ public abstract class HtmlValidateCliTests
         [Test]
         public void When1Error_WithConfig_WhereThisErrorIsWarn_AndMaxWarningsIs1()
         {
-            var options = new HtmlValidateOptions
+            HtmlValidateOptions options = new()
             {
                 Config = Configs.EmptyTitleWarn,
                 MaxWarnings = 1
@@ -101,7 +101,7 @@ public abstract class HtmlValidateCliTests
         [Test]
         public void When1Error_WithFullPathConfig_WhereThisErrorIsOff()
         {
-            var options = new HtmlValidateOptions
+            HtmlValidateOptions options = new()
             {
                 Config = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs", "empty-title-off.json"),
             };
@@ -114,7 +114,7 @@ public abstract class HtmlValidateCliTests
         [Test]
         public void WithCodeframeFormatter()
         {
-            var options = new HtmlValidateOptions
+            HtmlValidateOptions options = new()
             {
                 Formatter = HtmlValidateFormatter.Codeframe()
             };
@@ -127,7 +127,7 @@ public abstract class HtmlValidateCliTests
         [Test]
         public void WithJsonFormatter()
         {
-            var options = new HtmlValidateOptions
+            HtmlValidateOptions options = new()
             {
                 Formatter = HtmlValidateFormatter.Json()
             };
@@ -155,7 +155,7 @@ public abstract class HtmlValidateCliTests
 
         private void ValidateWithTextFormatterTargetingFile(string filePath)
         {
-            var options = new HtmlValidateOptions
+            HtmlValidateOptions options = new()
             {
                 Formatter = HtmlValidateFormatter.Text(filePath)
             };
@@ -184,7 +184,7 @@ public abstract class HtmlValidateCliTests
         {
             string filePath = $"{TestContext.CurrentContext.Test.Name}.txt";
 
-            var options = new HtmlValidateOptions
+            HtmlValidateOptions options = new()
             {
                 Formatter = HtmlValidateFormatter.Text(filePath)
             };
@@ -199,7 +199,7 @@ public abstract class HtmlValidateCliTests
         [Test]
         public void CurrentDirectory_WithValidExtensions()
         {
-            var options = new HtmlValidateOptions
+            HtmlValidateOptions options = new()
             {
                 Extensions = ["html"]
             };
@@ -212,7 +212,7 @@ public abstract class HtmlValidateCliTests
         [Test]
         public void CurrentDirectory_WithInvalidExtensions()
         {
-            var options = new HtmlValidateOptions
+            HtmlValidateOptions options = new()
             {
                 Extensions = ["htm"]
             };

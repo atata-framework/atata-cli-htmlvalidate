@@ -7,9 +7,11 @@ namespace Atata.Cli.HtmlValidate;
 /// </summary>
 public class HtmlValidateFormatter
 {
-    public HtmlValidateFormatter(string name, string filePath = null)
+    public HtmlValidateFormatter(string name, string? filePath = null)
     {
-        Name = name.CheckNotNullOrWhitespace(nameof(name));
+        Guard.ThrowIfNullOrWhitespace(name);
+
+        Name = name;
         FilePath = filePath;
     }
 
@@ -21,21 +23,21 @@ public class HtmlValidateFormatter
     /// <summary>
     /// Gets the output file path.
     /// </summary>
-    public string FilePath { get; }
+    public string? FilePath { get; }
 
-    public static HtmlValidateFormatter Checkstyle(string filePath = null) =>
+    public static HtmlValidateFormatter Checkstyle(string? filePath = null) =>
         new(Names.Checkstyle, filePath);
 
-    public static HtmlValidateFormatter Codeframe(string filePath = null) =>
+    public static HtmlValidateFormatter Codeframe(string? filePath = null) =>
         new(Names.Codeframe, filePath);
 
-    public static HtmlValidateFormatter Json(string filePath = null) =>
+    public static HtmlValidateFormatter Json(string? filePath = null) =>
         new(Names.Json, filePath);
 
-    public static HtmlValidateFormatter Stylish(string filePath = null) =>
+    public static HtmlValidateFormatter Stylish(string? filePath = null) =>
         new(Names.Stylish, filePath);
 
-    public static HtmlValidateFormatter Text(string filePath = null) =>
+    public static HtmlValidateFormatter Text(string? filePath = null) =>
         new(Names.Text, filePath);
 
     public static class Names

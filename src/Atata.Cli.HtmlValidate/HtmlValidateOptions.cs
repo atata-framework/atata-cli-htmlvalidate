@@ -8,7 +8,7 @@ public class HtmlValidateOptions
     /// <summary>
     /// Gets or sets the formatter.
     /// </summary>
-    public HtmlValidateFormatter Formatter { get; set; }
+    public HtmlValidateFormatter? Formatter { get; set; }
 
     /// <summary>
     /// Gets or sets the maximum allowed warnings count.
@@ -20,7 +20,7 @@ public class HtmlValidateOptions
     /// <summary>
     /// Gets or sets the configuration file path (full or relative to CLI <c>WorkingDirectory</c>).
     /// </summary>
-    public string Config { get; set; }
+    public string? Config { get; set; }
 
     /// <summary>
     /// Gets or sets the file extensions to use when searching for files in directories.
