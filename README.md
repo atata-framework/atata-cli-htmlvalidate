@@ -5,9 +5,9 @@
 [![Build status](https://dev.azure.com/atata-framework/atata-cli-htmlvalidate/_apis/build/status/atata-cli-htmlvalidate-ci?branchName=main)](https://dev.azure.com/atata-framework/atata-cli-htmlvalidate/_build/latest?definitionId=43&branchName=main)
 [![Slack](https://img.shields.io/badge/join-Slack-green.svg?colorB=4EB898)](https://join.slack.com/t/atata-framework/shared_invite/zt-5j3lyln7-WD1ZtMDzXBhPm0yXLDBzbA)
 [![Atata docs](https://img.shields.io/badge/docs-Atata_Framework-orange.svg)](https://atata.io)
-[![Twitter](https://img.shields.io/badge/follow-@AtataFramework-blue.svg)](https://twitter.com/AtataFramework)
+[![X](https://img.shields.io/badge/follow-@AtataFramework-blue.svg)](https://x.com/AtataFramework)
 
-**Atata.Cli.HtmlValidate** is a .NET library that provides an API for [html-validate](https://www.npmjs.com/package/html-validate) NPM package.
+**Atata.Cli.HtmlValidate** is a C#/.NET library that provides an API for [html-validate](https://www.npmjs.com/package/html-validate) NPM package.
 
 *The package targets .NET Standard 2.0, which supports .NET 5+, .NET Framework 4.6.1+ and .NET Core/Standard 2.0+.*
 
@@ -115,6 +115,12 @@ HtmlValidateResult result2 = await HtmlValidateCli.InDirectory("some/dir")
 - **`string Output { get; }`**\
   Gets the text output of result.
 
+## Community
+
+- Slack: [https://atata-framework.slack.com](https://join.slack.com/t/atata-framework/shared_invite/zt-5j3lyln7-WD1ZtMDzXBhPm0yXLDBzbA)
+- X: https://x.com/AtataFramework
+- Stack Overflow: https://stackoverflow.com/questions/tagged/atata
+
 ## Feedback
 
 Any feedback, issues and feature requests are welcome.
@@ -122,6 +128,10 @@ Any feedback, issues and feature requests are welcome.
 If you faced an issue please report it to [Atata.Cli.HtmlValidate Issues](https://github.com/atata-framework/atata-cli-htmlvalidate/issues),
 [ask a question on Stack Overflow](https://stackoverflow.com/questions/ask?tags=atata+csharp) using [atata](https://stackoverflow.com/questions/tagged/atata) tag
 or use another [Atata Contact](https://atata.io/contact/) way.
+
+## Contributing
+
+Check out [Contributing Guidelines](CONTRIBUTING.md) for details.
 
 ## Thanks
 
