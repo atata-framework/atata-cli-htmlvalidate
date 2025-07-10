@@ -19,10 +19,16 @@ jobs:
       projects: '**/*.sln'
       arguments: -c $(buildConfiguration) -warnaserror
 
-- job: RunTestsOnWindows
-  displayName: Run tests on Windows
+- job: RunTestsOnWindowsAndMacOS
+  displayName: Run tests on
+  strategy:
+    matrix:
+      macOS:
+        imageName: 'macOS-latest'
+      Windows:
+        imageName: 'windows-latest'
   pool:
-    vmImage: windows-latest
+    vmImage: $(imageName)
   steps:
   - task: UseDotNet@2
     displayName: Set up .NET SDK
@@ -32,18 +38,18 @@ jobs:
     displayName: Build solution
     inputs:
       command: build
-      projects: '**/*.sln'
+      projects: '*.sln'
       arguments: -c $(buildConfiguration) -p:RunAnalyzers=false
   - task: DotNetCoreCLI@2
-    displayName: Run tests
+    displayName: Run integration tests
     timeoutInMinutes: 5
     inputs:
       command: test
-      projects: '**/*Tests.csproj'
+      projects: 'test/*/*IntegrationTests.csproj'
       arguments: -c $(buildConfiguration) -s "azure-pipelines.runsettings" --no-build
 
-- job: RunTestsOnLinux
-  displayName: Run tests on Linux
+- job: RunTestsOnUbuntu
+  displayName: Run tests on Ubuntu
   pool:
     vmImage: ubuntu-latest
   steps:
@@ -55,37 +61,14 @@ jobs:
     displayName: Build solution
     inputs:
       command: build
-      projects: '**/*.sln'
+      projects: '*.sln'
       arguments: -c $(buildConfiguration) -p:RunAnalyzers=false
   - script: sudo npm install -g html-validate
     displayName: Install html-validate NPM package
   - task: DotNetCoreCLI@2
-    displayName: Run tests
+    displayName: Run integration tests
     timeoutInMinutes: 5
     inputs:
       command: test
-      projects: '**/*Tests.csproj'
-      arguments: -c $(buildConfiguration) -s "azure-pipelines.runsettings" --no-build
-
-- job: RunTestsOnMacOS
-  displayName: Run tests on MacOS
-  pool:
-    vmImage: macOS-latest
-  steps:
-  - task: UseDotNet@2
-    displayName: Set up .NET SDK
-    inputs:
-      version: $(netSdkVersion)
-  - task: DotNetCoreCLI@2
-    displayName: Build solution
-    inputs:
-      command: build
-      projects: '**/*.sln'
-      arguments: -c $(buildConfiguration) -p:RunAnalyzers=false
-  - task: DotNetCoreCLI@2
-    displayName: Run tests
-    timeoutInMinutes: 5
-    inputs:
-      command: test
-      projects: '**/*Tests.csproj'
+      projects: 'test/*/*IntegrationTests.csproj'
       arguments: -c $(buildConfiguration) -s "azure-pipelines.runsettings" --no-build
