@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Runtime.InteropServices;
+using NUnit.Framework;
 
 namespace Atata.Cli.HtmlValidate.UnitTests;
 
@@ -14,7 +15,10 @@ public static class PathUtilsTests
         public string WithValidValues(string relativeTo, string path)
         {
             string result = PathUtils.GetRelativePath(relativeTo, path);
-            Assert.That(result, Is.EqualTo(Path.GetRelativePath(relativeTo, path)));
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                Assert.That(result, Is.EqualTo(Path.GetRelativePath(relativeTo, path)));
+
             return result;
         }
     }
