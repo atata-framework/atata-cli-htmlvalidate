@@ -1,6 +1,4 @@
-﻿using Atata.Cli.Npm;
-
-namespace Atata.Cli.HtmlValidate;
+﻿namespace Atata.Cli.HtmlValidate;
 
 /// <summary>
 /// Represents the CLI of "html-validate" NPM package.
@@ -51,7 +49,7 @@ public class HtmlValidateCli : GlobalNpmPackageCli<HtmlValidateCli>
     public async Task<HtmlValidateResult> ValidateAsync(string path, HtmlValidateOptions? options = null) =>
         await Task.Run(() => Validate(path, options)).ConfigureAwait(false);
 
-    private static void AddOptions(StringBuilder commandText, HtmlValidateOptions options)
+    private void AddOptions(StringBuilder commandText, HtmlValidateOptions options)
     {
         if (options.Formatter is not null)
         {
@@ -65,11 +63,16 @@ public class HtmlValidateCli : GlobalNpmPackageCli<HtmlValidateCli>
             commandText.Append($" --max-warnings {options.MaxWarnings}");
 
         if (options.Config?.Length > 0)
-            commandText.Append($" -c \"{options.Config}\"");
+            commandText.Append($" -c \"{ResolveConfigPath(options.Config)}\"");
 
         if (options.Extensions?.Length > 0)
             commandText.Append(" --ext ").Append(string.Join(",", options.Extensions));
     }
+
+    private string ResolveConfigPath(string configPath) =>
+        RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && Path.IsPathRooted(configPath)
+            ? PathUtils.GetRelativePath(WorkingDirectory, configPath)
+            : configPath;
 
     private string ReadOutputFromFile(string filePath)
     {

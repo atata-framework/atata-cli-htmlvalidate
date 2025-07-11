@@ -41,7 +41,15 @@ jobs:
       projects: '*.sln'
       arguments: -c $(buildConfiguration) -p:RunAnalyzers=false
   - task: DotNetCoreCLI@2
+    displayName: Run unit tests
+    timeoutInMinutes: 3
+    inputs:
+      command: test
+      projects: 'test/*/*.UnitTests.csproj'
+      arguments: -c $(buildConfiguration) -s "azure-pipelines.codecoverage.runsettings" --no-build
+  - task: DotNetCoreCLI@2
     displayName: Run integration tests
+    condition: succeededOrFailed()
     timeoutInMinutes: 5
     inputs:
       command: test
@@ -66,7 +74,15 @@ jobs:
   - script: sudo npm install -g html-validate
     displayName: Install html-validate NPM package
   - task: DotNetCoreCLI@2
+    displayName: Run unit tests
+    timeoutInMinutes: 3
+    inputs:
+      command: test
+      projects: 'test/*/*.UnitTests.csproj'
+      arguments: -c $(buildConfiguration) -s "azure-pipelines.codecoverage.runsettings" --no-build
+  - task: DotNetCoreCLI@2
     displayName: Run integration tests
+    condition: succeededOrFailed()
     timeoutInMinutes: 5
     inputs:
       command: test

@@ -26,4 +26,8 @@ Requires html-validate (https://www.npmjs.com/package/html-validate) NPM package
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Atata.Cli.HtmlValidate.UnitTests" />
+  </ItemGroup>
+
 </Project>
