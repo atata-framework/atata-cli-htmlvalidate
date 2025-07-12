@@ -235,7 +235,7 @@ public abstract class HtmlValidateCliTests
 
             Sut.ResultOf(x => x.GetInstalledVersion())
                 .Should.Not.BeNullOrEmpty()
-                .Should.Equal(expectedVersion);
+                .Should.Be(expectedVersion);
         }
     }
 
@@ -249,7 +249,7 @@ public abstract class HtmlValidateCliTests
 
             Sut.Act(x => x.RequireVersion(version))
                 .ResultOf(x => x.GetInstalledVersion())
-                .Should.Equal(version);
+                .Should.Be(version);
         }
     }
 
