@@ -230,7 +230,7 @@ public abstract class HtmlValidateCliTests
         [Test]
         public void Ok()
         {
-            string expectedVersion = new NpmCli()
+            string? expectedVersion = new NpmCli()
                 .GetInstalledVersion(HtmlValidateCli.Name, global: true);
 
             Sut.ResultOf(x => x.GetInstalledVersion())
