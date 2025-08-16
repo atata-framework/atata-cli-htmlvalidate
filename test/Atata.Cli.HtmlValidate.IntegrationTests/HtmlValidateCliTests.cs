@@ -229,6 +229,7 @@ public abstract class HtmlValidateCliTests
     public sealed class GetInstalledVersion : HtmlValidateCliTests
     {
         [Test]
+        [Repeat(100)]
         public void Ok()
         {
             ////string? expectedVersion = new NpmCli()
