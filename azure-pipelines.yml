@@ -71,8 +71,8 @@ jobs:
       command: build
       projects: '*.sln'
       arguments: -c $(buildConfiguration) -p:RunAnalyzers=false
-  - script: sudo npm install -g html-validate
-    displayName: Install html-validate NPM package
+  # - script: sudo npm install -g html-validate
+  #   displayName: Install html-validate NPM package
   - task: DotNetCoreCLI@2
     displayName: Run unit tests
     timeoutInMinutes: 3
