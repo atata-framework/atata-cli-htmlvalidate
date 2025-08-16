@@ -19,7 +19,7 @@ public abstract class HtmlValidateCliTests
         Sut = HtmlValidateCli.InDirectory("TestPages").ToSutSubject();
     }
 
-    public class Validate : HtmlValidateCliTests
+    public sealed class Validate : HtmlValidateCliTests
     {
         [Test]
         public void InvalidFile() =>
@@ -225,7 +225,7 @@ public abstract class HtmlValidateCliTests
             Sut.ResultOf(x => x.Validate(path, options));
     }
 
-    public class GetInstalledVersion : HtmlValidateCliTests
+    public sealed class GetInstalledVersion : HtmlValidateCliTests
     {
         [Test]
         public void Ok()
@@ -239,7 +239,7 @@ public abstract class HtmlValidateCliTests
         }
     }
 
-    public class RequireVersion : HtmlValidateCliTests
+    public sealed class RequireVersion : HtmlValidateCliTests
     {
         [Test]
         [Platform(Exclude = "Linux", Reason = "No permissions.")]
