@@ -6,7 +6,7 @@ namespace Atata.Cli.HtmlValidate.IntegrationTests;
 
 public abstract class HtmlValidateCliTests
 {
-    private const string TestVersion = "9.7.1";
+    private const string TestVersion = "10.2.1";
 
     protected Subject<HtmlValidateCli> Sut { get; private set; } = null!;
 
