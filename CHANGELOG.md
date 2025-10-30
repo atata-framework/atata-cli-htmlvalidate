@@ -9,9 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Enable nullable reference types.
 - Upgrade Atata.Cli package to v4.0.0-beta.1.
 - Upgrade Atata.Cli.Npm package to v4.0.0-beta.1.
+
+## [2.4.0] - 2025-10-30
+
+### Changed
+
+- Enable nullable reference types.
+
+## Fixed
+
+- Fix absolute config path error for Windows.
 
 ## [2.3.0] - 2023-08-31
 
