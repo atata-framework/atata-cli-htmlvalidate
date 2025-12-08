@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="azure-pipelines.codecoverage.runsettings" />
+    <File Path="azure-pipelines.release.yml" />
+    <File Path="azure-pipelines.runsettings" />
+    <File Path="azure-pipelines.yml" />
+    <File Path="CHANGELOG.md" />
+    <File Path="CODE_OF_CONDUCT.md" />
+    <File Path="CONTRIBUTING.md" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="src/Atata.Cli.HtmlValidate/Atata.Cli.HtmlValidate.csproj" />
+  <Project Path="test/Atata.Cli.HtmlValidate.IntegrationTests/Atata.Cli.HtmlValidate.IntegrationTests.csproj" />
+  <Project Path="test/Atata.Cli.HtmlValidate.UnitTests/Atata.Cli.HtmlValidate.UnitTests.csproj" />
+</Solution>
