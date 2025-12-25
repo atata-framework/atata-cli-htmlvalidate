@@ -7,7 +7,7 @@
 [![Atata docs](https://img.shields.io/badge/docs-Atata_Framework-orange.svg)](https://atata.io)
 [![X](https://img.shields.io/badge/follow-@AtataFramework-blue.svg)](https://x.com/AtataFramework)
 
-**Atata.Cli.HtmlValidate** is a C#/.NET library that provides an API for [html-validate](https://www.npmjs.com/package/html-validate) NPM package.
+**Atata.Cli.HtmlValidate** is a C#/.NET library that provides an API for [html-validate](https://www.npmjs.com/package/html-validate) npm package.
 
 *The package targets .NET Standard 2.0, which supports .NET 5+, .NET Framework 4.6.1+ and .NET Core/Standard 2.0+.*
 
@@ -44,11 +44,11 @@ Install [`Atata.Cli.HtmlValidate`](https://www.nuget.org/packages/Atata.Cli.Html
   dotnet add package Atata.Cli.HtmlValidate
   ```
 
-### NPM Package
+### npm Package
 
-Requires [html-validate](https://www.npmjs.com/package/html-validate) NPM package to be installed.
+Requires [html-validate](https://www.npmjs.com/package/html-validate) npm package to be installed.
 
-- Using NPM Command:
+- Using npm command:
   ```
   npm install -g html-validate
   ```

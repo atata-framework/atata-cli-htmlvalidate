@@ -1,7 +1,7 @@
 ﻿namespace Atata.Cli.HtmlValidate;
 
 /// <summary>
-/// Represents the CLI of "html-validate" NPM package.
+/// Represents the CLI of "html-validate" npm package.
 /// </summary>
 public class HtmlValidateCli : GlobalNpmPackageCli<HtmlValidateCli>
 {

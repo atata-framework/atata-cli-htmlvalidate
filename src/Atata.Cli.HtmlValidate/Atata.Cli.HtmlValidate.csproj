@@ -4,9 +4,9 @@
     <TargetFrameworks>net8.0;net462</TargetFrameworks>
     <Version>4.0.0-beta.2</Version>
     <Description>
-C#/.NET library that provides an API for html-validate NPM package.
+C#/.NET library that provides an API for html-validate npm package.
 
-Requires html-validate (https://www.npmjs.com/package/html-validate) NPM package to be installed, but can install itself.
+Requires html-validate (https://www.npmjs.com/package/html-validate) npm package to be installed, but can install itself.
 
 The package targets .NET 8.0 and .NET Framework 4.6.2.
     </Description>
