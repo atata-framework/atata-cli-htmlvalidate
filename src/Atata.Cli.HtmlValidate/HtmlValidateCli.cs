@@ -70,7 +70,10 @@ public class HtmlValidateCli : GlobalNpmPackageCli<HtmlValidateCli>
     }
 
     private string ResolveConfigPath(string configPath) =>
-        RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && Path.IsPathRooted(configPath)
+#if NET8_0_OR_GREATER
+        OperatingSystem.IsWindows() &&
+#endif
+        Path.IsPathRooted(configPath)
             ? PathUtils.GetRelativePath(WorkingDirectory, configPath)
             : configPath;
 
